@@ -28,7 +28,7 @@ Feel free to improve the code and send me pull requests! Especially on the TODO 
 
 License
 ------------
-Designed and developed by [Eric Kok](eric@2312.nl) of [2312 development](http://2312.nl). 
+Designed and developed by [Eric Kok](mailto:eric@2312.nl) of [2312 development](http://2312.nl).
 
     Copyright 2014 Eric Kok
     
