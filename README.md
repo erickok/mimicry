@@ -1,6 +1,6 @@
 mimicry
 =================
-Mimicry is a tiny Android library -- actually just class -- to format items in a `ListAdapter` to display as a grid. Why not just use a `GridView`? Because a `MimicryAdapter` can be used with other `ListAdapter`s!
+Mimicry is a tiny Android library -- actually just one class -- to format items in a `ListAdapter` to display as a grid. Why not just use a `GridView`? Because a `MimicryAdapter` can be used with other `ListAdapter`s!
 
 ![Screen shot of the mimicry-sample app](http://2312.nl/download/mimicry-sample_framed.png)
 
@@ -22,9 +22,11 @@ mimicryAdapter.setOnMimicryItemClicked(new OnMimicryItemClickedListener() {
 });
 ```
 
+View recycling is supported as per the 0.2 release, but note that this requires the wrapped adapter to only use one view type (which is probably what you want anyway). A RuntimeException is thrown if multiple view types are explicitly reported by the wrapped adapter.
+
 Contributing
 ------------
-Feel free to improve the code and send me pull requests! Especially on the TODO list is caching of views that the underlying list adapter creates. Perhaps the internal layout code could be improved, as the layout params of the contained views is overriden at the moment.
+Feel free to improve the code and send me pull requests! Perhaps the internal layout code could be improved, as the layout params of the contained views is overriden at the moment.
 
 License
 ------------

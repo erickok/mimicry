@@ -27,6 +27,10 @@ public class MimicryAdapter extends BaseAdapter {
 		this.context = context;
 		this.columnCount = columnCount;
 		this.wrappedAdapter = wrappedAdapter;
+		if (wrappedAdapter.getViewTypeCount() > 1) {
+			throw new RuntimeException(
+					"Mimicry currently only supports one view type per wrapped adapter.");
+		}
 	}
 
 	public void setOnMimicryItemClicked(
@@ -66,8 +70,11 @@ public class MimicryAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		// Possibly reuse the row layout view
-		if (convertView == null) {
-			convertView = new GridMimicRow(context);
+		GridMimicRow gridMimicRow;
+		if (convertView != null && convertView instanceof GridMimicRow) {
+			gridMimicRow = (GridMimicRow) convertView;
+		} else {
+			gridMimicRow = new GridMimicRow(context);
 		}
 
 		// Gather the views to contain in this row, directly from the wrapped
@@ -76,18 +83,18 @@ public class MimicryAdapter extends BaseAdapter {
 		final View[] views = new View[columnCount];
 		final Object[] items = getItem(position);
 		for (int i = 0; i < columnCount; i++) {
-			// TODO Keep columnCount instances of the underlying view type so we
-			// can reuse them with convertView
-			if (position * columnCount + i < wrappedAdapter.getCount())
+			if (position * columnCount + i < wrappedAdapter.getCount()) {
+				View recycleView = gridMimicRow.getChildCount() >= i ? gridMimicRow
+						.getChildAt(i) : null;
 				views[i] = wrappedAdapter.getView(position * columnCount + i,
-						null, parent);
-			else
+						recycleView, parent);
+			} else {
 				views[i] = null;
+			}
 		}
-		((GridMimicRow) convertView).setItems(views, items,
-				onMimicryItemClicked);
+		gridMimicRow.setItems(views, items, onMimicryItemClicked);
 
-		return convertView;
+		return gridMimicRow;
 	}
 
 	// Contains a number of items, simply as views with even width in a

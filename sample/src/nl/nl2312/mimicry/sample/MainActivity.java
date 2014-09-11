@@ -14,6 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
+ * Main screen of the sample activity for Mimicry, showing a single
+ * {@link ListView} that holds multiple adapters: header views, a list of
+ * cheeses and, notably, a wrapper images adapter that mimics a grid view of
+ * cheese pictures.
  * 
  * @author Eric Kok
  */
@@ -26,7 +30,8 @@ public class MainActivity extends ListActivity {
 		MergeAdapter combined = new MergeAdapter();
 
 		// First show a header text
-		TextView firstHeader = (TextView) getLayoutInflater().inflate(R.layout.item_header, getListView(), false);
+		TextView firstHeader = (TextView) getLayoutInflater().inflate(
+				R.layout.item_header, getListView(), false);
 		firstHeader.setText("Our top choices");
 		combined.addAdapter(new ViewHolderAdapter(firstHeader));
 
@@ -36,7 +41,8 @@ public class MainActivity extends ListActivity {
 		combined.addAdapter(imagesAdapter);
 
 		// Third is a header again
-		TextView secondHeader = (TextView) getLayoutInflater().inflate(R.layout.item_header, getListView(), false);
+		TextView secondHeader = (TextView) getLayoutInflater().inflate(
+				R.layout.item_header, getListView(), false);
 		secondHeader.setText("All cheeses available");
 		combined.addAdapter(new ViewHolderAdapter(secondHeader));
 
