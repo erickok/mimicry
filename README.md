@@ -6,7 +6,11 @@ Mimicry is a tiny Android library -- actually just one class -- to format items 
 
 Usage
 ------------
-You can add the mimicry project directly as Android Library project or, if you prefer, just copy the sole `nl.nl2312.mimicry.library.MimicryAdapter` class to your project.
+Import the library from Maven Central using Gradle:
+```groovy
+compile 'nl.2312:mimicry:0.2'
+```
+You can also add the mimicry project as Android Library project or, if you prefer, just copy the sole `nl.nl2312.mimicry.library.MimicryAdapter` class to your project.
 ```java
 ListAdapter wrappedAdapter = new ArrayAdapter<String>(this, ..., ...);
 ListAdapter mimicryAdapter = new MimicryAdapter(this, 3, wrappedAdapter);
